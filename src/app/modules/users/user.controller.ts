@@ -44,7 +44,8 @@ const updateUserRole = async (
   next: NextFunction
 ) => {
   try {
-    const result = await userServices.createUser(req.body);
+    const { _id, role } = req.body;
+    const result = await userServices.updateUserRole(_id, role);
     res.status(200).json({
       success: true,
       message: "User Update successfully",

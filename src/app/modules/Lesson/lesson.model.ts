@@ -11,5 +11,7 @@ const lessonSchema = new Schema<ILesson>(
   { timestamps: true }
 );
 
+
+
 const lessonModel = model<ILesson>("Lesson", lessonSchema);
 export default lessonModel;
