@@ -48,8 +48,15 @@ const loginUser = async (payload: { email: string; password: string }) => {
   };
 };
 
+//update role
 const updateUserRole = async (_id: string, role: string) => {
   const result = await userModel.updateOne({ _id }, { role: role });
+  return result;
+};
+
+//get all user
+const getAllUser = async () => {
+  const result = await userModel.find().select("-password");
   return result;
 };
 
@@ -57,4 +64,5 @@ export const userServices = {
   createUser,
   loginUser,
   updateUserRole,
+  getAllUser,
 };

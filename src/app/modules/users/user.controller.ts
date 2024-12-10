@@ -45,9 +45,23 @@ const updateUserRole = async (
 ) => {
   try {
     const result = await userServices.createUser(req.body);
-    res.status(201).json({
+    res.status(200).json({
       success: true,
-      message: "User Created successfully",
+      message: "User Update successfully",
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+//get all user
+const getAllUser = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const result = await userServices.getAllUser();
+    res.status(200).json({
+      success: true,
+      message: "User retrieved successfully",
       data: result,
     });
   } catch (error) {
@@ -59,4 +73,5 @@ export const userController = {
   createUser,
   loginUser,
   updateUserRole,
+  getAllUser,
 };
