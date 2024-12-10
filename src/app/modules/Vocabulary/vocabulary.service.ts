@@ -6,6 +6,13 @@ const createVocabulary = async (payload: IVocabulary) => {
   return result;
 };
 
+//get all vocabulary
+const getAllVocabulary = async () => {
+  const result = await vocabularyModel.find();
+  return result;
+};
+
 export const vocabularyServices = {
   createVocabulary,
+  getAllVocabulary,
 };

@@ -26,6 +26,25 @@ const createVocabulary = async (
   }
 };
 
+//get all vocabulary
+const getAllVocabulary = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const result = await vocabularyServices.getAllVocabulary();
+    res.status(200).json({
+      success: true,
+      message: "Vocabulary retrieved successfully",
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 export const vocabularyController = {
   createVocabulary,
+  getAllVocabulary,
 };
