@@ -10,5 +10,6 @@ router.get(
   auth("Admin"),
   vocabularyController.getAllVocabulary
 );
+router.patch("/update", auth("Admin"), vocabularyController.updateVocabulary);
 
 export const vocabularyRoute = router;

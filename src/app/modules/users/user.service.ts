@@ -1,3 +1,4 @@
+import { isValidObjectId } from "mongoose";
 import config from "../../config";
 import AppError from "../../errors/AppError";
 import { IUser } from "./user.interface";
@@ -50,6 +51,16 @@ const loginUser = async (payload: { email: string; password: string }) => {
 
 //update role
 const updateUserRole = async (_id: string, role: string) => {
+  const isValid = isValidObjectId(_id);
+  if (!isValid) {
+    throw new AppError(406, "Invalid ObjectId");
+  }
+
+  const isAvailable = await userModel.findById(_id);
+
+  if (!isAvailable) {
+    throw new AppError(404, "User not found");
+  }
   const result = await userModel.updateOne({ _id }, { role: role });
   return result;
 };

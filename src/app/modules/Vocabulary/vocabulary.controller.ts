@@ -48,7 +48,27 @@ const getAllVocabulary = async (
   }
 };
 
+//update vocabulary
+const updateVocabulary = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { _id, updatedDoc } = req.body;
+    const result = await vocabularyServices.updateVocabulary(_id, updatedDoc);
+    res.status(200).json({
+      success: true,
+      message: "Vocabulary updated successfully.",
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 export const vocabularyController = {
   createVocabulary,
   getAllVocabulary,
+  updateVocabulary
 };
