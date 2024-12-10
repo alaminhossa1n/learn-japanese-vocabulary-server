@@ -11,5 +11,6 @@ router.get(
   vocabularyController.getAllVocabulary
 );
 router.patch("/update", auth("Admin"), vocabularyController.updateVocabulary);
+router.delete("/delete/:id", auth("Admin"), vocabularyController.deleteVocabulary);
 
 export const vocabularyRoute = router;

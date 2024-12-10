@@ -45,8 +45,26 @@ const updateVocabulary = async (
   return result;
 };
 
+//delete vocabulary
+const deleteVocabulary = async (id: string) => {
+  const isValid = isValidObjectId(id);
+  if (!isValid) {
+    throw new AppError(406, "Invalid ObjectId");
+  }
+
+  const isAvailable = await vocabularyModel.findById(id);
+
+  if (!isAvailable) {
+    throw new AppError(404, "Vocabulary not found");
+  }
+
+  const result = await vocabularyModel.deleteOne({ _id: id });
+  return result;
+};
+
 export const vocabularyServices = {
   createVocabulary,
   getAllVocabulary,
   updateVocabulary,
+  deleteVocabulary
 };

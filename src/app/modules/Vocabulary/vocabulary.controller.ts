@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { vocabularyServices } from "./vocabulary.service";
 import lessonModel from "../Lesson/lesson.model";
+import vocabularyModel from "./vocabulary.model";
 
 const createVocabulary = async (
   req: Request,
@@ -67,8 +68,28 @@ const updateVocabulary = async (
   }
 };
 
+//delete vocabulary
+const deleteVocabulary = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const id = req.params.id;
+    const result = await vocabularyServices.deleteVocabulary(id);
+    res.status(200).json({
+      success: true,
+      message: "Vocabulary deleted successfully.",
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 export const vocabularyController = {
   createVocabulary,
   getAllVocabulary,
-  updateVocabulary
+  updateVocabulary,
+  deleteVocabulary,
 };

@@ -37,6 +37,17 @@ const updateLesson = async (_id: string, updatedDoc: Partial<ILesson>) => {
 
 //delete lesson
 const deleteLesson = async (id: string) => {
+  const isValid = isValidObjectId(id);
+  if (!isValid) {
+    throw new AppError(406, "Invalid ObjectId");
+  }
+
+  const isAvailable = await lessonModel.findById(id);
+
+  if (!isAvailable) {
+    throw new AppError(404, "lesson not found");
+  }
+
   const result = await lessonModel.deleteOne({ _id: id });
   return result;
 };
