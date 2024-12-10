@@ -2,6 +2,11 @@ import { NextFunction, Request, Response } from "express";
 import { userServices } from "./user.service";
 
 const createUser = async (req: Request, res: Response, next: NextFunction) => {
+  console.log(req.body);
+  const imgUrl = req.file?.path;
+  // req.body.recipeImage = imgUrl;
+  console.log(imgUrl);
+  //TODO Photo Upload:
   try {
     const result = await userServices.createUser(req.body);
     const { password, ...userWithoutPassword } = result.toObject();

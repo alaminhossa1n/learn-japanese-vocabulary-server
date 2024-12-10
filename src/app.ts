@@ -1,6 +1,7 @@
 import express, { Request, Response, Application, NextFunction } from "express";
 import cors from "cors";
 import { userRoute } from "./app/modules/users/user.route";
+import { lessonRoute } from "./app/modules/Lesson/lesson.route";
 
 const app: Application = express();
 
@@ -18,6 +19,9 @@ app.get("/", (req: Request, res: Response) => {
 
 //routes
 app.use("/api/user", userRoute);
+
+//lessons
+app.use("/api/lesson", lessonRoute);
 
 //global error handler
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
