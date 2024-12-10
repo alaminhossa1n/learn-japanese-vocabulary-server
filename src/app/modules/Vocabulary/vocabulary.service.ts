@@ -7,8 +7,15 @@ const createVocabulary = async (payload: IVocabulary) => {
 };
 
 //get all vocabulary
-const getAllVocabulary = async () => {
-  const result = await vocabularyModel.find();
+const getAllVocabulary = async (q: { lessonNumber?: number }) => {
+  const { lessonNumber } = q;
+
+  const query: { lessonNumber?: number } = {};
+  if (lessonNumber) {
+    query.lessonNumber = lessonNumber;
+  }
+
+  const result = await vocabularyModel.find(query);
   return result;
 };
 

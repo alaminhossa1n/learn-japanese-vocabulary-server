@@ -33,7 +33,11 @@ const getAllVocabulary = async (
   next: NextFunction
 ) => {
   try {
-    const result = await vocabularyServices.getAllVocabulary();
+    const lessonNumber = req.query.lessonNumber
+      ? parseInt(req.query.lessonNumber as string, 10)
+      : undefined;
+
+    const result = await vocabularyServices.getAllVocabulary({ lessonNumber });
     res.status(200).json({
       success: true,
       message: "Vocabulary retrieved successfully",
