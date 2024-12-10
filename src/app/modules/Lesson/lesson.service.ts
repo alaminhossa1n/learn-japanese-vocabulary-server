@@ -6,12 +6,24 @@ const createLesson = async (payload: ILesson) => {
   return result;
 };
 
+//get all lesson
 const getAllLesson = async () => {
   const result = await lessonModel.find();
   return result;
 };
 
+//update lesson
+const updateLesson = async (_id: string, updatedDoc: Partial<ILesson>) => {
+    if (!Object.keys(updatedDoc).length) {
+      throw new Error("Updated document cannot be empty.");
+    }
+  
+    const result = await lessonModel.updateOne({ _id }, { $set: updatedDoc });
+    return result;
+  };
+
 export const lessonServices = {
   createLesson,
-  getAllLesson
+  getAllLesson,
+  updateLesson,
 };

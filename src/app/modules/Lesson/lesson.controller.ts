@@ -36,7 +36,27 @@ const getAllLesson = async (
   }
 };
 
+//update lesson
+const updateLesson = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { _id, updatedDoc } = req.body;
+    const result = await lessonServices.updateLesson(_id, updatedDoc);
+    res.status(200).json({
+      success: true,
+      message: "Lesson updated successfully.",
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 export const lessonController = {
   createLesson,
-  getAllLesson
+  getAllLesson,
+  updateLesson,
 };
