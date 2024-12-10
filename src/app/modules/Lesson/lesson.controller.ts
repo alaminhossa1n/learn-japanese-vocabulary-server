@@ -1,7 +1,5 @@
 import { NextFunction, Request, Response } from "express";
 import { lessonServices } from "./lesson.service";
-import userModel from "../users/user.model";
-import AppError from "../../errors/AppError";
 
 const createLesson = async (
   req: Request,

@@ -2,6 +2,7 @@ import express, { Request, Response, Application, NextFunction } from "express";
 import cors from "cors";
 import { userRoute } from "./app/modules/users/user.route";
 import { lessonRoute } from "./app/modules/Lesson/lesson.route";
+import { vocabularyRoute } from "./app/modules/Vocabulary/vocabulary.route";
 
 const app: Application = express();
 
@@ -22,6 +23,9 @@ app.use("/api/user", userRoute);
 
 //lessons
 app.use("/api/lesson", lessonRoute);
+
+//vocabulary
+app.use("/api/vocabulary", vocabularyRoute);
 
 //global error handler
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
