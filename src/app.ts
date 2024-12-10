@@ -3,6 +3,7 @@ import cors from "cors";
 import { userRoute } from "./app/modules/users/user.route";
 import { lessonRoute } from "./app/modules/Lesson/lesson.route";
 import { vocabularyRoute } from "./app/modules/Vocabulary/vocabulary.route";
+import { tutorialRoute } from "./app/modules/YouTubeTutorial/youTubeTutorial.route";
 
 const app: Application = express();
 
@@ -26,6 +27,9 @@ app.use("/api/lesson", lessonRoute);
 
 //vocabulary
 app.use("/api/vocabulary", vocabularyRoute);
+
+// Tutorial
+app.use("/api/tutorial", tutorialRoute);
 
 //global error handler
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {

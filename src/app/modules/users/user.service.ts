@@ -48,7 +48,13 @@ const loginUser = async (payload: { email: string; password: string }) => {
   };
 };
 
+const updateUserRole = async (_id: string, role: string) => {
+  const result = await userModel.updateOne({ _id }, { role: role });
+  return result;
+};
+
 export const userServices = {
   createUser,
   loginUser,
+  updateUserRole,
 };

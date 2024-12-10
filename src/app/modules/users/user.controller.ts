@@ -36,7 +36,27 @@ const loginUser = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
+//update user role
+
+const updateUserRole = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const result = await userServices.createUser(req.body);
+    res.status(201).json({
+      success: true,
+      message: "User Created successfully",
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 export const userController = {
   createUser,
   loginUser,
+  updateUserRole,
 };
