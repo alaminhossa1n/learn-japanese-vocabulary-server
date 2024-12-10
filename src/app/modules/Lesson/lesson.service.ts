@@ -6,6 +6,12 @@ const createLesson = async (payload: ILesson) => {
   return result;
 };
 
+const getAllLesson = async () => {
+  const result = await lessonModel.find();
+  return result;
+};
+
 export const lessonServices = {
   createLesson,
+  getAllLesson
 };

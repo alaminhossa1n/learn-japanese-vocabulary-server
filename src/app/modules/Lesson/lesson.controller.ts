@@ -18,6 +18,25 @@ const createLesson = async (
   }
 };
 
+//get all lesson
+const getAllLesson = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const result = await lessonServices.getAllLesson();
+    res.status(200).json({
+      success: true,
+      message: "Lesson retrieved successfully",
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 export const lessonController = {
   createLesson,
+  getAllLesson
 };
