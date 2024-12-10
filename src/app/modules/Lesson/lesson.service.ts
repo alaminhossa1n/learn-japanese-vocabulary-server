@@ -14,16 +14,23 @@ const getAllLesson = async () => {
 
 //update lesson
 const updateLesson = async (_id: string, updatedDoc: Partial<ILesson>) => {
-    if (!Object.keys(updatedDoc).length) {
-      throw new Error("Updated document cannot be empty.");
-    }
-  
-    const result = await lessonModel.updateOne({ _id }, { $set: updatedDoc });
-    return result;
-  };
+  if (!Object.keys(updatedDoc).length) {
+    throw new Error("Updated document cannot be empty.");
+  }
+
+  const result = await lessonModel.updateOne({ _id }, { $set: updatedDoc });
+  return result;
+};
+
+//delete lesson
+const deleteLesson = async (id: string) => {
+  const result = await lessonModel.deleteOne({ _id: id });
+  return result;
+};
 
 export const lessonServices = {
   createLesson,
   getAllLesson,
   updateLesson,
+  deleteLesson,
 };

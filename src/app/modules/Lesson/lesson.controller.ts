@@ -55,8 +55,28 @@ const updateLesson = async (
   }
 };
 
+//delete lesson
+const deleteLesson = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const id = req.params.id;
+    const result = await lessonServices.deleteLesson(id);
+    res.status(200).json({
+      success: true,
+      message: "Lesson deleted successfully.",
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 export const lessonController = {
   createLesson,
   getAllLesson,
   updateLesson,
+  deleteLesson,
 };
