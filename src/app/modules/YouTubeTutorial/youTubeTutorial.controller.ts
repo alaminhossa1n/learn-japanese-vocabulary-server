@@ -36,7 +36,27 @@ const getAllTutorial = async (
   }
 };
 
+//delete tutorial
+const deleteTutorial = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const id = req.params.id;
+    const result = await tutorialServices.deleteTutorial(id);
+    res.status(200).json({
+      success: true,
+      message: "Tutorial deleted successfully.",
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 export const tutorialController = {
   createTutorial,
   getAllTutorial,
+  deleteTutorial,
 };
