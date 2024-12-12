@@ -6,6 +6,12 @@ const createTutorial = async (payload: ITutorial) => {
   return result;
 };
 
+const getALlTutorials = async () => {
+  const result = await tutorialModel.find();
+  return result;
+};
+
 export const tutorialServices = {
   createTutorial,
+  getALlTutorials,
 };

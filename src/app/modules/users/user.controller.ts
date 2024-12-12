@@ -2,11 +2,6 @@ import { NextFunction, Request, Response } from "express";
 import { userServices } from "./user.service";
 
 const createUser = async (req: Request, res: Response, next: NextFunction) => {
-  console.log(req.body);
-  const imgUrl = req.file?.path;
-  // req.body.recipeImage = imgUrl;
-  console.log(imgUrl);
-  //TODO Photo Upload:
   try {
     const result = await userServices.createUser(req.body);
     const { password, ...userWithoutPassword } = result.toObject();
@@ -70,9 +65,23 @@ const getAllUser = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
+const checkUser = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const result = await userServices.checkUser(req.body);
+    res.status(200).json({
+      success: true,
+      message: "User retrieved successfully",
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 export const userController = {
   createUser,
   loginUser,
   updateUserRole,
   getAllUser,
+  checkUser,
 };

@@ -18,6 +18,25 @@ const createTutorial = async (
   }
 };
 
+//get all Tutorial
+const getAllTutorial = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const result = await tutorialServices.getALlTutorials();
+    res.status(200).json({
+      success: true,
+      message: "Tutorials retrieved successfully",
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 export const tutorialController = {
   createTutorial,
+  getAllTutorial,
 };

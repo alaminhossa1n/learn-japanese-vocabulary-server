@@ -8,6 +8,11 @@ import jwt from "jsonwebtoken";
 
 // user create
 const createUser = async (payload: IUser) => {
+  const isUserExist = await userModel.findOne({ email: payload.email });
+
+  if (isUserExist) {
+    throw new AppError(409, "User Already Exist");
+  }
   const result = await userModel.create(payload);
   return result;
 };
@@ -71,9 +76,19 @@ const getAllUser = async () => {
   return result;
 };
 
+//check user
+const checkUser = async (id: string) => {
+  const result = await userModel.findById(id).select("-password");
+  if (!result) {
+    throw new AppError(404, "User not found!");
+  }
+  return result;
+};
+
 export const userServices = {
   createUser,
   loginUser,
   updateUserRole,
   getAllUser,
+  checkUser,
 };

@@ -2,8 +2,19 @@ import { isValidObjectId } from "mongoose";
 import { IVocabulary } from "./vocabulary.interface";
 import vocabularyModel from "./vocabulary.model";
 import AppError from "../../errors/AppError";
+import lessonModel from "../Lesson/lesson.model";
 
 const createVocabulary = async (payload: IVocabulary) => {
+  const isLessonExist = await lessonModel.findOne({
+    lessonNumber: payload.lessonNumber,
+  });
+
+  if (!isLessonExist) {
+    throw new AppError(
+      404,
+      `Lesson Number ${payload.lessonNumber} does not Exist.`
+    );
+  }
   const result = await vocabularyModel.create(payload);
   return result;
 };
@@ -66,5 +77,5 @@ export const vocabularyServices = {
   createVocabulary,
   getAllVocabulary,
   updateVocabulary,
-  deleteVocabulary
+  deleteVocabulary,
 };

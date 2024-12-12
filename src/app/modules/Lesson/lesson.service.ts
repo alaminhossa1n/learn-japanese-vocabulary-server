@@ -4,6 +4,13 @@ import lessonModel from "./lesson.model";
 import AppError from "../../errors/AppError";
 
 const createLesson = async (payload: ILesson) => {
+  const isExist = await lessonModel.findOne({
+    lessonNumber: payload.lessonNumber,
+  });
+
+  if (isExist) {
+    throw new AppError(409, `Lesson ${payload.lessonNumber} is Already Exist`);
+  }
   const result = await lessonModel.create(payload);
   return result;
 };
@@ -29,6 +36,17 @@ const updateLesson = async (_id: string, updatedDoc: Partial<ILesson>) => {
 
   if (!isAvailable) {
     throw new AppError(404, "Lesson not found");
+  }
+
+  const isLessonNumberExist = await lessonModel.findOne({
+    lessonNumber: updatedDoc.lessonNumber,
+  });
+
+  if (isLessonNumberExist) {
+    throw new AppError(
+      409,
+      `Lesson ${updatedDoc.lessonNumber} is Already Exist`
+    );
   }
 
   const result = await lessonModel.updateOne({ _id }, { $set: updatedDoc });

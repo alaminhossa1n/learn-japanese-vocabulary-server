@@ -7,7 +7,7 @@ const auth = (...roles: any) => {
   return (req: Request, res: Response, next: NextFunction) => {
     const tokenWithBearer = req.headers.authorization;
     const token = tokenWithBearer?.split(" ");
-    
+
     if (!token) {
       throw new AppError(401, "You are unauthorized");
     }
