@@ -8,7 +8,10 @@ import { tutorialRoute } from "./app/modules/YouTubeTutorial/youTubeTutorial.rou
 const app: Application = express();
 
 const corsOptions = {
-  origin: ["http://localhost:5173", ""],
+  origin: [
+    "http://localhost:5173",
+    "https://learn-japanese-vocabulary.netlify.app",
+  ],
   credentials: true,
 };
 

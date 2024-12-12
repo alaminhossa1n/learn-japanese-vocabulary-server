@@ -1,7 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { vocabularyServices } from "./vocabulary.service";
 import lessonModel from "../Lesson/lesson.model";
-import vocabularyModel from "./vocabulary.model";
 
 const createVocabulary = async (
   req: Request,

@@ -38,17 +38,6 @@ const updateLesson = async (_id: string, updatedDoc: Partial<ILesson>) => {
     throw new AppError(404, "Lesson not found");
   }
 
-  const isLessonNumberExist = await lessonModel.findOne({
-    lessonNumber: updatedDoc.lessonNumber,
-  });
-
-  if (isLessonNumberExist) {
-    throw new AppError(
-      409,
-      `Lesson ${updatedDoc.lessonNumber} is Already Exist`
-    );
-  }
-
   const result = await lessonModel.updateOne({ _id }, { $set: updatedDoc });
   return result;
 };
